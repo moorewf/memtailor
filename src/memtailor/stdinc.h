@@ -98,7 +98,7 @@ namespace memt {
   /// The alignment that memory allocators must ensure. In other words
   /// allocators must return pointer addresses that are divisible by
   /// MemoryAlignment. MemoryAlignment must be a power of 2.
-  static const unsigned int MemoryAlignment = sizeof(void*);
+  static const unsigned int MemoryAlignment = static_cast<unsigned int>(sizeof(void*));
 
   static const unsigned int BitsPerByte = 8;
 }
