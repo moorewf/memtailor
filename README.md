@@ -20,3 +20,10 @@ allocation has the further benefits that it stays within the C++
 standard, it will not cause a stack overflow, you can have multiple
 arena allocators at the same time and allocation is not tied to a
 function invocation.
+
+The following copyright and license notice applies to all of the files in
+memtailor.
+
+Copyright 2013 Bjarke Hammersholt Roune (http://www.broune.com) and Cornell
+University.  MemTailor is distributed under the Modified BSD License. See
+license.txt.
