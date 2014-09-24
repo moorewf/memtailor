@@ -40,7 +40,7 @@ TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
 unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++0x
-unittest_LDFLAGS = $(top_builddir)/libmemtailor.a
+unittest_LDADD = $(top_builddir)/libmemtailor.a -lpthread
 
 # test_LIBS=
 unittest_SOURCES=src/test/ArenaTest.cpp src/test/BufferPoolTest.cpp	\
