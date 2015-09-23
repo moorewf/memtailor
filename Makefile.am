@@ -5,13 +5,14 @@ ACLOCAL_AMFLAGS = -I build/autotools/m4
 # Options passed to the C PreProcessor (CPP), NOT the C Plus Plus compiler.
 AM_CPPFLAGS = -I${top_srcdir}/ $(DEPS_CFLAGS)
 
-lib_LIBRARIES = libmemtailor.a
+# tell Libtool what the name of the library is.
+lib_LTLIBRARIES = libmemtailor.la
 
 # set the C++ compiler to include src/
 AM_CXXFLAGS=-I$(top_srcdir)/src/ -std=gnu++0x
 
 # the sources that are built to make the library
-libmemtailor_a_SOURCES =		\
+libmemtailor_la_SOURCES =		\
   src/memtailor/BufferPool.cpp src/memtailor/Arena.cpp	\
   src/memtailor/MemoryBlocks.cpp src/memtailor.cpp
 
@@ -40,7 +41,7 @@ TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
 unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++0x
-unittest_LDADD = $(top_builddir)/libmemtailor.a -lpthread
+unittest_LDADD = $(top_builddir)/libmemtailor.la -lpthread
 
 # test_LIBS=
 unittest_SOURCES=src/test/ArenaTest.cpp src/test/BufferPoolTest.cpp	\
