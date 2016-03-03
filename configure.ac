@@ -111,8 +111,7 @@ AC_PROG_INSTALL
 # Locate the C++ compiler.
 AC_PROG_CXX
 
-# Set up LibTool
-LT_INIT([disable-shared])
+AC_PROG_RANLIB
 
 dnl Set the version for the library -- this concerns compatibility of the
 dnl source and binary interface of the library and is not the same as the
