@@ -15,13 +15,17 @@ add_library(memtailor
   src/memtailor/MemoryBlocks.h
   )
 
+find_package(Threads 2.1 REQUIRED QUIET)
+
+target_link_libraries(memtailor Threads::Threads)
+
 target_include_directories(memtailor
   PUBLIC
     src
   )
 
 install(TARGETS memtailor ARCHIVE DESTINATION lib)
-install(FILES include/memtailor.h DESTINATION include)
+install(FILES src/memtailor.h DESTINATION include)
 install(DIRECTORY src/memtailor/
   DESTINATION include/memtailor
   FILES_MATCHING PATTERN "*.h"
