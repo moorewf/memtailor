@@ -13,6 +13,7 @@ add_library(memtailor
   src/memtailor/ArenaVector.h
   src/memtailor/BufferPool.h
   src/memtailor/MemoryBlocks.h
+  src/memtailor/stdinc.h
   )
 
 find_package(Threads 2.1 REQUIRED QUIET)
@@ -29,7 +30,7 @@ install(FILES src/memtailor.h DESTINATION include)
 install(DIRECTORY src/memtailor/
   DESTINATION include/memtailor
   FILES_MATCHING PATTERN "*.h"
-  PATTERN stdinc.h EXCLUDE
+#  PATTERN stdinc.h EXCLUDE
   )
 
 option(PACKAGE_TESTS "Build the tests" ON)
@@ -43,7 +44,6 @@ if(PACKAGE_TESTS)
     src/test/testMain.cpp
     )
   target_link_libraries(memtailor-gtests memtailor)
-  endif()
 
 ################################
 # add gtest testing ############
@@ -72,4 +72,4 @@ target_include_directories(memtailor-gtests
 add_test(NAME memtailor-gtests
       COMMAND memtailor-gtests
   )
-
+endif()
