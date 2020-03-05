@@ -39,6 +39,8 @@ add_compile_options(
 )
 
 add_library(memtailor STATIC
+  src/memtailor.h
+  src/memtailor.cpp
   src/memtailor/Arena.cpp
   src/memtailor/BufferPool.cpp
   src/memtailor/MemoryBlocks.cpp
