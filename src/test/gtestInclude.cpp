@@ -5,4 +5,4 @@
 // the compiler flags are the same, which is the whole point of the
 // recommendation to build gtest for each program.
 
-#include "src/gtest-all.cc"
+#include <gtest/gtest.h>
