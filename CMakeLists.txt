@@ -70,8 +70,8 @@ install(FILES README.md license.txt
   )
 
 
-option(PACKAGE_TESTS "Build the tests" ON)
-if(PACKAGE_TESTS)
+option(BUILD_TESTING "Build the tests" ON)
+if(BUILD_TESTING)
   enable_testing()
   add_executable(memtailor-gtests
     src/test/ArenaTest.cpp
@@ -80,33 +80,31 @@ if(PACKAGE_TESTS)
     src/test/gtestInclude.cpp
     src/test/testMain.cpp
     )
-  target_link_libraries(memtailor-gtests memtailor)
 
-################################
-# add gtest testing ############
-################################
+  ################################
+  # add gtest testing ############
+  ################################
+  find_package(GTest)
+  include(GoogleTest)
+  gtest_discover_tests(memtailor-gtests)
+  add_test(NAME memtailor-gtests COMMAND memtailor-gtests)
 
-include(FetchContent)
+  if(FALSE AND GTEST_FOUND)
+    target_link_libraries(memtailor-gtests memtailor GTest::GTest GTest::Main)
+    target_include_directories(memtailor-gtests PRIVATE ${GTEST_INCLUDE_DIR})
+  else()
+    include(FetchContent)
+    FetchContent_Declare(googletest
+      GIT_REPOSITORY https://github.com/google/googletest.git
+      GIT_TAG        release-1.10.0
+      )
+    FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        release-1.8.0
-)
-
-FetchContent_GetProperties(googletest)
-if(NOT googletest_POPULATED)
-  FetchContent_Populate(googletest)
-endif()
-
-target_include_directories(memtailor-gtests
-  PRIVATE
-  ${googletest_SOURCE_DIR}/googletest/include
-  ${googletest_SOURCE_DIR}/googletest/src
-  ${googletest_SOURCE_DIR}/googletest
-  )
-
-add_test(NAME memtailor-gtests
-      COMMAND memtailor-gtests
-  )
+    target_link_libraries(memtailor-gtests memtailor gtest)
+    target_include_directories(memtailor-gtests PRIVATE
+      ${googletest_SOURCE_DIR}/googletest/include
+      ${googletest_SOURCE_DIR}/googletest/src
+      ${googletest_SOURCE_DIR}/googletest
+      )
+  endif()
 endif()
