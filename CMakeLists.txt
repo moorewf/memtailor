@@ -77,7 +77,6 @@ if(BUILD_TESTING)
     src/test/ArenaTest.cpp
     src/test/BufferPoolTest.cpp
     src/test/MemoryBlocksTest.cpp
-    src/test/gtestInclude.cpp
     src/test/testMain.cpp
     )
 
