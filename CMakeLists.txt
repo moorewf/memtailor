@@ -88,7 +88,7 @@ if(BUILD_TESTING)
   gtest_discover_tests(memtailor-gtests)
   add_test(NAME memtailor-gtests COMMAND memtailor-gtests)
 
-  if(FALSE AND GTEST_FOUND)
+  if(GTEST_FOUND)
     target_link_libraries(memtailor-gtests memtailor GTest::GTest GTest::Main)
     target_include_directories(memtailor-gtests PRIVATE ${GTEST_INCLUDE_DIR})
   else()
