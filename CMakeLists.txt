@@ -7,6 +7,10 @@ project(memtailor VERSION 1.0 LANGUAGES CXX)
 
 find_package(Threads 2.1 REQUIRED QUIET)
 
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+  add_compile_options(-DMEMT_DEBUG)
+endif()
+
 add_compile_options(
   -DPACKAGE_NAME="${PROJECT_NAME}"
   -DPACKAGE_TARNAME="${PROJECT_NAME}"
