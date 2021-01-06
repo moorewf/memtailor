@@ -25,6 +25,11 @@ namespace memt {
     /** Makes the front block have the given capacity. */
     MemoryBlocks(size_t capacityInBytes) {allocBlock(capacityInBytes);}
 
+    MemoryBlocks& operator=(MemoryBlocks&& source) {
+      _block = std::move(source._block);
+      return *this;
+    }
+
     /** Frees all blocks. */
     ~MemoryBlocks() {freeAllBlocks();}
 
@@ -143,6 +148,15 @@ namespace memt {
       Block(size_t capacity, Block* previous);
       Block(Block const&); // unavailable
       void operator=(Block const&); // unavailable
+
+      Block& operator=(Block&& source) {
+        _begin = source._begin;
+        _position = source._position;
+        _end = source._end;
+        _previous = source._previous;
+        source.makeNull();
+	return *this;
+      }
 
       /// Makes this a null block object. Does NOT free the owned memory!
       void makeNull() {

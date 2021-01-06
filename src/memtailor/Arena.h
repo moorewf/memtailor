@@ -47,7 +47,13 @@ namespace memt {
   public:
     Arena();
     ~Arena();
+   
+    Arena(Arena&& source) : _blocks(std::move(source._blocks)) {}
 
+    Arena& operator=(Arena&& source) {
+      _blocks = std::move(source._blocks);
+    }
+    
     // ***** Basic void* interface *****
 
     /** Returns a pointer to a buffer of size bytes. Throws bad_alloc if
